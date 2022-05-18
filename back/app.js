@@ -61,6 +61,8 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 
 // Initialisation des Routes
 
-
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'response sent !' }); 
+ });
 
 module.exports = app;
