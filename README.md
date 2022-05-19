@@ -10,11 +10,11 @@ Pour cela, référez-vous à la [documentation officielle](https://dev.mysql.com
 
 Lancer le terminal et accéder à MySQL
 
->mysql -u root -p
+```mysql -u root -p```
 
 Puis lancer la requête suivante en changeant nom_de_la_BDD par un nom de votre choix
 
->CREATE DATABASE nom_de_la_BDD;
+```CREATE DATABASE nom_de_la_BDD;```
 
 ### Via un éditeur SGBD
 
@@ -26,20 +26,21 @@ Clonez le repo sur votre machine
 
 Créer un fichier <code>.env</code> à la racine du dossier 'back' et renseignez les champs suivant :
 
->PORT=3000
->DBPORT=3001
->
->DB_USERNAME=root
->DB_PASSWORD=VotreMotDePasseMySQL
->DB_DATABASE=nomDeVotreBaseDeDonnées
->DB_HOST=127.0.0.1
+```
+PORT=3000
+DBPORT=3001
+DB_USERNAME=root
+DB_PASSWORD=VotreMotDePasseMySQL
+DB_DATABASE=nomDeVotreBaseDeDonnées
+DB_HOST=127.0.0.1
+```
 
 Dans le dossier 'back', ouvrez le terminal et lancer l'installation des dépendances
 
->npm install
+```npm install```
 
 Ceci, fait, il vous suffit de lancer le script pour démarrer le serveur
 
->npm run dev
+```node server```
 
 
