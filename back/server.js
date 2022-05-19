@@ -39,17 +39,6 @@ const errorHandler = (error) => {
   }
 };
 
-db.sequelize
-    .sync()
-    .then(() => {
-        app.listen(process.env.PORT || 3000, () => {
-            console.log('server is started :)')
-        });
-    })
-    .catch((err) => {
-        console.log('Error connecting :${err.message}');
-    });
-
 server.on('error', errorHandler);
 server.on('listening', () => {
   const address = server.address();
