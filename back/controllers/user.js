@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
 
-exports.signup = async (req, res, next) => {
+exports.signup = (req, res, next) => {
 
     // Mise à disposition du lien vers l'image utilisateur par défaut
 
