@@ -1,3 +1,4 @@
+const fs = require("fs");
 const { User } = require("../models");
 
 // Affichage de tous les profils
@@ -9,7 +10,7 @@ exports.allProfiles = async (req, res) => {
     })
     .catch((error) => {
         res.status(400).json({
-            error: error,
+            error: error
         });
     });
 };
@@ -23,9 +24,8 @@ exports.oneProfile = (req, res) => {
         }
     })
     .then((user) => {
-        console.log(user)
 
-        // Ajout d'une condition pour gérer l'absence d'utilisateur
+        // Ajout d'une condition pour gérer l'absence utilisateur
         
         if (user == null) {
             res.status(404).json({
@@ -33,7 +33,6 @@ exports.oneProfile = (req, res) => {
             })
         }
         res.status(200).json(user);
-        console.log(req.params)
     })
     .catch((error) => {
         res.status(400).json({
@@ -50,6 +49,46 @@ exports.modifyProfile = async (req, res) => {
 
 // Suppression d'un profil
 
-exports.deleteProfile = async (req, res) => {
-
-};
+exports.deleteProfile = (req, res) => {
+    User.findOne({ 
+        where: {
+            id: req.params.id
+        }
+     }).then((profile) => {
+         console.log(req)
+        if (profile == null) {
+          res.status(404).json({
+            error: new Error("Utilisateur non trouvé")
+          });
+        }
+    
+        // Comparaison de l'userId pour que seul le propriétaire du profil puisse delete
+    
+        if (profile.userId !== req.auth.userId) {
+          return res.status(401).json({
+            error: new Error('Requête non autorisée')
+          });
+        }
+    
+        // Suppression de l'image dans le système de fichiers et de son lien en BDD
+    
+        const filename = profile.img_profile.split("/profiles/")[1];
+        fs.unlink(`profiles/${filename}`, () => {
+          User.destroy({ 
+              where: {
+                id: req.params.id,
+              },
+           })
+            .then(() => {
+              res.status(200).json({
+                message: "Utilisateur supprimé",
+              });
+            })
+            .catch((error) => {
+              res.status(400).json({
+                error: error,
+              });
+            });
+        });
+      });
+    };
