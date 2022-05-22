@@ -61,9 +61,11 @@ app.use("/images/feeds", express.static(path.join(__dirname, "feeds")));
 // Mise à disposition des fichiers routes
 
 const userRoutes = require('./routes/userRoutes');
+const profileRoutes = require('./routes/profileRoutes')
 
 // Routes
 
 app.use('/api/auth', userRoutes);
+app.use('/api', profileRoutes);
 
 module.exports = app;
