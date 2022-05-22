@@ -9,13 +9,13 @@ module.exports = (req, res, next) => {
     const userId = decodedToken.userId;
     req.auth = { userId };
     if (req.body.userId && req.body.userId !== userId) {
-      throw 'User ID invalide';
+      throw 'Identifiant invalide (user ID)';
     } else {
       next();
     }
   } catch {
     res.status(401).json({
-      error: new Error('Requête invalide')
+      message: "Requête invalide"
     });
   }
 

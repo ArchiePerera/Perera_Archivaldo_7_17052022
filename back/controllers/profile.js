@@ -50,9 +50,6 @@ exports.modifyProfile = async (req, res) => {
 // Suppression d'un profil
 
 exports.deleteProfile = (req, res) => {
-    const id = req.params.id;
-    const userId = req.auth.userId;
-    console.log(userId)
     User.findOne({ 
         where: {
             id: req.params.id
@@ -60,17 +57,16 @@ exports.deleteProfile = (req, res) => {
      }).then((profile) => {
         if (profile == null) {
           res.status(404).json({
-            error: new Error("Utilisateur non trouvé")
+            message: "Utilisateur non trouvé"
           });
         }
     
         // Comparaison de l'userId pour que seul le propriétaire du profil puisse delete
 
-        // Quel élément de comparaison ?
     
-        if (id !== userId) {
+        if (profile.id !== req.auth.userId) {
           return res.status(401).json({
-            error: new Error('Requête non autorisée')
+            message: "Requête non autorisée"
           });
         }
     
@@ -93,6 +89,6 @@ exports.deleteProfile = (req, res) => {
                 error: error,
               });
             });
-        });
+       });
       });
     };
