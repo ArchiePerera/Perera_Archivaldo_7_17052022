@@ -37,10 +37,21 @@ DB_HOST=127.0.0.1
 
 Dans le dossier 'back', ouvrez le terminal et lancer l'installation des dépendances
 
-```npm install```
+```
+npm install
+```
+
+Créez la base de données groupomania dans le terminal
+
+```
+npx sequelize-cli db:create
+```
+
 
 Ceci, fait, il vous suffit de lancer le script pour démarrer le serveur
 
-```node server```
+```
+node server
+```
 
 
