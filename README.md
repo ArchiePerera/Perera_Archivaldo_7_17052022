@@ -29,7 +29,7 @@ PORT=3000
 DBPORT=3001
 DB_USERNAME=root
 DB_PASSWORD=VotreMotDePasseMySQL
-DB_DATABASE=nomDeVotreBaseDeDonnées
+DB_DATABASE=groupomania
 DB_HOST=127.0.0.1
 ```
 
@@ -51,6 +51,8 @@ Ceci, fait, il vous suffit de lancer le script pour démarrer le serveur
 ```
 node server
 ```
+
+## Lancement du serveur front
 
 ## Paramètres de l'API
 

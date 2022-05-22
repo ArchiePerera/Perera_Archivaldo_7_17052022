@@ -28,7 +28,7 @@ const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
     max: 100,
     windowMs: 60 * 60 * 1000, //1h
-    message: "Too many request from this IP"
+    message: "Trop de requêtes en provenance de cet IP"
 });
 
 //----------------- BASE DE DONNÉES -------------------
@@ -41,11 +41,11 @@ db.sequelize
     .sync()
     .then(() => {
         app.listen(process.env.DBPORT || 3001, () => {
-            console.log('server is started :)')
+            console.log('Le serveur tourne :)')
         });
     })
     .catch((err) => {
-        console.log(`Error connecting :${err.message}`);
+        console.log(`Erreur de connexion :${err.message}`);
     });
 
 //----------------- ROUTES -----------------------------

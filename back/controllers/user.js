@@ -26,7 +26,7 @@ exports.signup = (req, res, next) => {
       // Vérification via une regex de la forme de l'input entrée par l'utilisateur dans le champ email
 
       if (!/^[\w\d.+-]+@[\w.-]+\.[a-z]{2,}$/.test(req.body.email)) {
-        return res.status(400).json({ message: "email invalide" });
+        return res.status(400).json({ error: "email invalide" });
       }
 
       // Création de l'utilisateur en BDD
@@ -44,7 +44,7 @@ exports.login = (req, res, next) => {
   // Vérification de l'input entré par l'utilisateur dans le champ email
 
   if (!/^[\w\d.+-]+@[\w.-]+\.[a-z]{2,}$/.test(req.body.email)) {
-    return res.status(400).json({ message: "email invalide" });
+    return res.status(400).json({ EvalError: "email invalide" });
   }
 
   // Recherche de l'email dans la Base de données

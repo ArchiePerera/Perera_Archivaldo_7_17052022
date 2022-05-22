@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
     }
   } catch {
     res.status(401).json({
-      message: "Requête invalide"
+      error: "Requête invalide"
     });
   }
 

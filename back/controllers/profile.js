@@ -8,9 +8,9 @@ exports.allProfiles = (req, res) => {
     .then((users) => {
       res.status(200).json(users);
     })
-    .catch((error) => {
+    .catch((err) => {
       res.status(400).json({
-        error: error,
+        error: "mauvaise requête :" + err
       });
     });
 };
@@ -28,14 +28,14 @@ exports.oneProfile = (req, res) => {
 
       if (user == null) {
         res.status(404).json({
-          message: "Utilisateur non trouvé",
+          error: "Utilisateur non trouvé",
         });
       }
       res.status(200).json(user);
     })
-    .catch((error) => {
+    .catch((err) => {
       res.status(400).json({
-        error: error,
+        error: "mauvaise requête :" + err
       });
     });
 };
@@ -50,7 +50,7 @@ exports.modifyProfile = async (req, res) => {
   }).then((profile) => {
     if (profile == null) {
       res.status(404).json({
-        message: "Utilisateur non trouvé",
+        error: "Utilisateur non trouvé",
       });
     }
 
@@ -58,11 +58,25 @@ exports.modifyProfile = async (req, res) => {
 
     if (profile.id !== req.auth.userId) {
       return res.status(401).json({
-        message: "Requête non autorisée",
+        error: "Requête non autorisée",
       });
     }
 
     console.log("you can modify");
+    console.log(req.body)
+
+    if (!req.file) {
+      User.update({ ...req.body, id: req.params.id }, { where: { id: req.params.id } })
+      .then(() => res.status(200).json({
+        message: "profil utilisateur modifié"
+      }))
+      .catch((err) => res.status(400).json({
+        error: "mauvaise requête: " + err
+      }))
+    } else {
+      
+    }
+
   });
 };
 
@@ -76,7 +90,7 @@ exports.deleteProfile = (req, res) => {
   }).then((profile) => {
     if (profile == null) {
       res.status(404).json({
-        message: "Utilisateur non trouvé",
+        error: "Utilisateur non trouvé",
       });
     }
 
@@ -84,7 +98,7 @@ exports.deleteProfile = (req, res) => {
 
     if (profile.id !== req.auth.userId) {
       return res.status(401).json({
-        message: "Requête non autorisée",
+        error: "Requête non autorisée",
       });
     }
 
@@ -102,9 +116,9 @@ exports.deleteProfile = (req, res) => {
             message: "Utilisateur supprimé",
           });
         })
-        .catch((error) => {
+        .catch((err) => {
           res.status(400).json({
-            error: error,
+            error: "mauvaise requête :" + err
           });
         });
     });
