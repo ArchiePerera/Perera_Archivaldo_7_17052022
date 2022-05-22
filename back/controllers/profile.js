@@ -3,7 +3,7 @@ const { User } = require("../models");
 
 // Affichage de tous les profils
 
-exports.allProfiles = async (req, res) => {
+exports.allProfiles = (req, res) => {
     User.findAll()
     .then((users) => {
         res.status(200).json(users);
@@ -50,12 +50,14 @@ exports.modifyProfile = async (req, res) => {
 // Suppression d'un profil
 
 exports.deleteProfile = (req, res) => {
+    const id = req.params.id;
+    const userId = req.auth.userId;
+    console.log(userId)
     User.findOne({ 
         where: {
             id: req.params.id
         }
      }).then((profile) => {
-         console.log(req)
         if (profile == null) {
           res.status(404).json({
             error: new Error("Utilisateur non trouvé")
@@ -63,8 +65,10 @@ exports.deleteProfile = (req, res) => {
         }
     
         // Comparaison de l'userId pour que seul le propriétaire du profil puisse delete
+
+        // Quel élément de comparaison ?
     
-        if (profile.userId !== req.auth.userId) {
+        if (id !== userId) {
           return res.status(401).json({
             error: new Error('Requête non autorisée')
           });
