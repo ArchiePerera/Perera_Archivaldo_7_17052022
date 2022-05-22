@@ -52,4 +52,6 @@ Ceci, fait, il vous suffit de lancer le script pour démarrer le serveur
 node server
 ```
 
+## Paramètres de l'API
+
 
