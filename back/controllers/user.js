@@ -7,7 +7,7 @@ exports.signup = (req, res, next) => {
     // Mise à disposition du lien vers l'image utilisateur par défaut
 
   const avatarDefault =
-    `${req.protocol}://${req.get("host")}/images/profiles/default/user.jpg`;
+    `${req.protocol}://${req.get("host")}/images/profiles/default/user.png`;
 
     //Création du hash pour masquer le mot de passe en BDD
 

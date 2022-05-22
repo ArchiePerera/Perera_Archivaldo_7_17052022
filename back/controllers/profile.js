@@ -65,6 +65,8 @@ exports.modifyProfile = async (req, res) => {
     console.log("you can modify");
     console.log(req.body)
 
+    // Modification du profil utilisateur (if sans image else avec image)
+
     if (!req.file) {
       User.update({ ...req.body, id: req.params.id }, { where: { id: req.params.id } })
       .then(() => res.status(200).json({
@@ -74,7 +76,27 @@ exports.modifyProfile = async (req, res) => {
         error: "mauvaise requête: " + err
       }))
     } else {
-      
+
+      console.log(req)
+
+      const filename = profile.img_profile.split("/images/profiles/")[1];
+      fs.unlink(`images/profiles/${filename}`, () => {
+        console.log("image supprimée");
+      });
+
+      const profileObject = {
+        ...req.body,
+        img_profile: `${req.protocol}://${req.get('host')}/images/profiles/${req.file.filename}`,
+      };
+
+      User.update(
+        
+        { ...profileObject, id: req.params.id }, { where: { id: req.params.id }}
+      )
+        .then(() => res.status(200).json({ message: "profil utilisateur modifié" }))
+        .catch((error) => res.status(400).json({ error }));
+    
+
     }
 
   });
@@ -104,7 +126,7 @@ exports.deleteProfile = (req, res) => {
 
     // Suppression de l'image dans le système de fichiers et de son lien en BDD
 
-    const filename = profile.img_profile.split("/profiles/")[1];
+    const filename = profile.img_profile.split("/images/profiles/")[1];
     fs.unlink(`profiles/${filename}`, () => {
       User.destroy({
         where: {
