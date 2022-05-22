@@ -4,21 +4,19 @@
 
 Pour cela, référez-vous à la [documentation officielle](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/) et suivez les instruction en fonction de votre OS.
 
-## Créez une base de données MySQL
+## Gestion des bases de données MySQL
 
 ### Via le terminal
 
-Lancer le terminal et accéder à MySQL
+Lancez le terminal et accédez à MySQL
 
-```mysql -u root -p```
-
-Puis lancer la requête suivante en changeant nom_de_la_BDD par un nom de votre choix
-
-```CREATE DATABASE nom_de_la_BDD;```
+```
+mysql -u root -p
+```
 
 ### Via un éditeur SGBD
 
-Je vous recommande [MySQL WORKBENCH](https://dev.mysql.com/doc/workbench/en/) pour gérer vos base de données sans passer par le terminal.
+Je vous recommande [MySQL WORKBENCH](https://dev.mysql.com/doc/workbench/en/) pour gérer vos bases de données sans passer par le terminal.
 
 ## Lancement du serveur back
 

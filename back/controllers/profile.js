@@ -44,7 +44,28 @@ exports.oneProfile = (req, res) => {
 // Modification d'un profil
 
 exports.modifyProfile = async (req, res) => {
+  User.findOne({ 
+    where: {
+        id: req.params.id
+    }
+ }).then((profile) => {
+    if (profile == null) {
+      res.status(404).json({
+        message: "Utilisateur non trouvé"
+      });
+    }
 
+    // Comparaison de l'userId pour que seul le propriétaire du profil puisse delete
+
+
+    if (profile.id !== req.auth.userId) {
+      return res.status(401).json({
+        message: "Requête non autorisée"
+      });
+    }
+
+    console.log("you can modify");
+  });
 }
 
 // Suppression d'un profil
