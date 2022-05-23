@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { User } = require("../models");
 
-// Affichage de tous les profils
+//---------------------- Affichage de tous les profils  ---------------
 
 exports.allProfiles = (req, res) => {
   User.findAll()
@@ -15,7 +15,7 @@ exports.allProfiles = (req, res) => {
     });
 };
 
-// Affichage d'un profil
+//------------------------- Affichage d'un profil --------------------
 
 exports.oneProfile = (req, res) => {
   User.findOne({
@@ -40,7 +40,7 @@ exports.oneProfile = (req, res) => {
     });
 };
 
-// Modification d'un profil
+// --------------------------- Modification d'un profil -----------------
 
 exports.modifyProfile = async (req, res) => {
   User.findOne({
@@ -62,8 +62,8 @@ exports.modifyProfile = async (req, res) => {
       });
     }
 
-    console.log("you can modify");
-    console.log(req.body)
+//    console.log("you can modify");
+
 
     // Modification du profil utilisateur (if sans image else avec image)
 
@@ -77,7 +77,7 @@ exports.modifyProfile = async (req, res) => {
       }))
     } else {
 
-      console.log(req)
+      // Modificationdu profil utilisateur avec une image - efface l'image précédente si celle-ci n'est pas celle par défaut
 
       const filename = profile.img_profile.split("/images/profiles/")[1];
       fs.unlink(`images/profiles/${filename}`, () => {
@@ -102,7 +102,7 @@ exports.modifyProfile = async (req, res) => {
   });
 };
 
-// Suppression d'un profil
+// ---------------------------- Suppression d'un profil --------------------------------
 
 exports.deleteProfile = (req, res) => {
   User.findOne({
@@ -127,7 +127,7 @@ exports.deleteProfile = (req, res) => {
     // Suppression de l'image dans le système de fichiers et de son lien en BDD
 
     const filename = profile.img_profile.split("/images/profiles/")[1];
-    fs.unlink(`profiles/${filename}`, () => {
+    fs.unlink(`images/profiles/${filename}`, () => {
       User.destroy({
         where: {
           id: req.params.id,

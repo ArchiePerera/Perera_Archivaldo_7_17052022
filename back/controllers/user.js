@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
 
+// ------------------------ Création d'un utilisateur -----------------------------
+
 exports.signup = (req, res, next) => {
 
     // Mise à disposition du lien vers l'image utilisateur par défaut
@@ -38,6 +40,8 @@ exports.signup = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+// ---------------------- Connexion de l'utilisateur --------------------------------
 
 exports.login = (req, res, next) => {
 

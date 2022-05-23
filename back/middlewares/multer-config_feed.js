@@ -1,6 +1,6 @@
 const multer = require("multer");
 
-// Configuration de multer
+// ------------------- Configuration de multer feeds --------------------------
 
 const MIME_TYPES = {
   "image/jpg": "jpg",
@@ -10,7 +10,7 @@ const MIME_TYPES = {
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    let path = "../images/feeds";
+    let path = "images/feeds";
     callback(null, path);
   },
   filename: (req, file, callback) => {

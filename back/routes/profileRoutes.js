@@ -5,7 +5,7 @@ const profileCtl = require("../controllers/profile");
 const auth = require("../middlewares/auth");
 const multerProfile = require("../middlewares/multer-config_profile")
 
-// Routes Profils d'utilisateurs
+// ---------------- Routes Profils d'utilisateurs -------------------------
 
 router.get("/profiles", auth, profileCtl.allProfiles);
 router.get("/profiles/:id", auth, profileCtl.oneProfile);

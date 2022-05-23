@@ -19,7 +19,9 @@ app.use(cors());
 
 const helmet = require('helmet');
 app.use(helmet({ 
-    crossOriginResourcePolicy: { policy: "same-site" } 
+    crossOriginResourcePolicy: { 
+        policy: "same-site" 
+    } 
 }));
 
 // Initialisation du limiteur de requêtes à 100 sur 1h
@@ -63,7 +65,7 @@ app.use("/images/feeds", express.static(path.join(__dirname, "feeds")));
 const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes')
 
-// Routes
+// Routes user && profile
 
 app.use('/api/auth', userRoutes);
 app.use('/api', profileRoutes);
