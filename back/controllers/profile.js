@@ -31,7 +31,7 @@ exports.oneProfile = (req, res) => {
     },
 
     // Exclusion du mdp dans la réponse
-    
+
     attributes: {
       exclude: ["password"],
     },
@@ -67,6 +67,8 @@ exports.modifyProfile = async (req, res) => {
       });
     }
 
+    console.log(req.id)
+
     // Comparaison de l'userId pour que seul le propriétaire du profil puisse delete
 
     if (profile.id !== req.auth.userId) {
@@ -77,6 +79,7 @@ exports.modifyProfile = async (req, res) => {
 
 //    console.log("you can modify");
 
+//    console.log(req.file)
 
     // Modification du profil utilisateur (if sans image else avec image)
 

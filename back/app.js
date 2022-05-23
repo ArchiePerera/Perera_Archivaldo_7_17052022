@@ -33,6 +33,24 @@ const limiter = rateLimit({
     message: "Trop de requêtes en provenance de cet IP"
 });
 
+// ----------------- SESSION --------------------------
+
+const session = require('express-session');
+
+const sessionConfig = {
+    name: 'take a cookie',
+    secret: process.env.SESSION_SECRET,
+    cookie: {
+        maxAge: 1000 * 60 * 60,
+        secure: false, // Mettre sur 'true' en production: https access only
+        httpOnly: true, // Pas d'injection JS
+    },
+    resave : false,
+    saveUninitialized: true,
+};
+
+app.use(session(sessionConfig));
+
 //----------------- BASE DE DONNÉES -------------------
 
 const db = require('./models');
@@ -63,7 +81,8 @@ app.use("/images/feeds", express.static(path.join(__dirname, "feeds")));
 // Mise à disposition des fichiers routes
 
 const userRoutes = require('./routes/userRoutes');
-const profileRoutes = require('./routes/profileRoutes')
+const profileRoutes = require('./routes/profileRoutes');
+const { Server } = require('http');
 
 // Routes user && profile
 
