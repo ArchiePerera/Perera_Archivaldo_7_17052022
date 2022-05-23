@@ -4,7 +4,14 @@ const { User } = require("../models");
 //---------------------- Affichage de tous les profils  ---------------
 
 exports.allProfiles = (req, res) => {
-  User.findAll()
+  User.findAll({
+
+    // Exclusion du mdp dans la réponse
+
+    attributes: {
+      exclude: ["password"]
+    }
+  })
     .then((users) => {
       res.status(200).json(users);
     })
@@ -21,6 +28,12 @@ exports.oneProfile = (req, res) => {
   User.findOne({
     where: {
       id: req.params.id,
+    },
+
+    // Exclusion du mdp dans la réponse
+    
+    attributes: {
+      exclude: ["password"],
     },
   })
     .then((user) => {
