@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const profileCtl = require("../controllers/profile");
+const postCtl = require("../controllers/post");
 const auth = require("../middlewares/auth");
 const multerProfile = require("../middlewares/multer-config_feed")
 
-// ---------------- Routes Profils d'utilisateurs -------------------------
+// ---------------- Routes Post -------------------------
 
-router.get("/posts", auth, profileCtl.allProfiles);
-router.get("/posts/:id", auth, profileCtl.oneProfile);
-router.put("/posts/:id", auth, multerProfile, profileCtl.modifyProfile);
-router.delete("/posts/:id", auth, profileCtl.deleteProfile);
+router.get("/posts", auth, postCtl.allPost);
+router.get("/posts", auth, postCtl.createPost);
+router.get("/posts/:id", auth, postCtl.onePost);
+router.put("/posts/:id", auth, multerProfile, postCtl.modifyPost);
+router.delete("/posts/:id", auth, postCtl.deletePost);
 
 module.exports = router;
