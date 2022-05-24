@@ -40,7 +40,7 @@ exports.oneProfile = (req, res) => {
       // Ajout d'une condition pour gérer l'absence utilisateur
 
       if (user == null) {
-        res.status(404).json({
+        res.status(401).json({
           error: "Utilisateur non trouvé",
         });
       }

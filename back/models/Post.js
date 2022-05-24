@@ -1,6 +1,5 @@
-
 module.exports = (sequelize, DataTypes) => {
-    const Post = sequelize.define('post', {
+    const Post = sequelize.define('Post', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -17,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         file: {
             type: DataTypes.STRING(255),
-            allowNull: false,
+            allowNull: true,
             defaultValue: '',
         },
         date: {

@@ -36,8 +36,8 @@ db.Sequelize = Sequelize;
 
 
 db.User = require('./User')(sequelize, Sequelize);
-db.Post = require('./post')(sequelize, Sequelize);
-db.Comment = require('./comment')(sequelize, Sequelize);
+db.Post = require('./Post')(sequelize, Sequelize);
+db.Comment = require('./Comment')(sequelize, Sequelize);
 
 
 db.User.hasMany(db.Post, {
