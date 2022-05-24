@@ -83,12 +83,14 @@ app.use("/images/feeds", express.static(path.join(__dirname, "feeds")));
 const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const postRoutes = require('./routes/postRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 const { Server } = require('http');
 
-// Routes user && profile
+// Routes 
 
 app.use('/api/auth', userRoutes);
 app.use('/api', profileRoutes);
 app.use('/api', postRoutes);
+app.use('/api', commentRoutes);
 
 module.exports = app;

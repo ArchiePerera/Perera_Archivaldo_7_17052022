@@ -67,9 +67,6 @@ exports.modifyProfile = (req, res) => {
       });
     }
 
-    console.log(req)
-    console.log(profile)
-
     // Comparaison de l'userId pour que seul le propriétaire du profil puisse delete
 
     if (profile.id !== req.auth.userId) {
@@ -82,7 +79,7 @@ exports.modifyProfile = (req, res) => {
 
     // Modification du profil utilisateur (if sans image else avec image)
 
-    if (profile !== null && !req.file) {
+    if (!req.file) {
       User.update({ ...req.body, id: req.params.id }, { where: { id: req.params.id } })
       .then(() => res.status(200).json({
         message: "profil utilisateur modifié"
@@ -90,7 +87,7 @@ exports.modifyProfile = (req, res) => {
       .catch((err) => res.status(400).json({
         error: "mauvaise requête: " + err
       }))
-    } else if (profile !== null) {
+    } else {
 
       // Modification du profil utilisateur avec une image - efface l'image précédente si celle-ci n'est pas celle par défaut
 

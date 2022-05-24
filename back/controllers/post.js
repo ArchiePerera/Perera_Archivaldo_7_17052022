@@ -32,11 +32,12 @@ exports.allPost = (req, res) => {
 exports.onePost = (req, res) => {
     Post.findOne()
         .then((post) => {
-          // Ajout d'une condition pour gérer l'absence utilisateur
+          
+          // Ajout d'une condition pour gérer l'absence de Post
     
           if (post == null) {
             res.status(401).json({
-              error: "Utilisateur non trouvé",
+              error: "Post non trouvé",
             });
           }
           res.status(200).json(post);
