@@ -55,7 +55,7 @@ exports.oneProfile = (req, res) => {
 
 // --------------------------- Modification d'un profil -----------------
 
-exports.modifyProfile = async (req, res) => {
+exports.modifyProfile = (req, res) => {
   User.findOne({
     where: {
       id: req.params.id,
