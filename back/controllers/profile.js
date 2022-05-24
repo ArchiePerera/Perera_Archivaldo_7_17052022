@@ -61,13 +61,14 @@ exports.modifyProfile = async (req, res) => {
       id: req.params.id,
     },
   }).then((profile) => {
-    if (profile == null) {
-      res.status(404).json({
-        error: "Utilisateur non trouvé",
+    if (profile === null) {
+      return res.status(401).json({
+        error: "Utilisateur non trouvé"
       });
     }
 
-    console.log(req.id)
+    console.log(req)
+    console.log(profile)
 
     // Comparaison de l'userId pour que seul le propriétaire du profil puisse delete
 
@@ -79,11 +80,9 @@ exports.modifyProfile = async (req, res) => {
 
 //    console.log("you can modify");
 
-//    console.log(req.file)
-
     // Modification du profil utilisateur (if sans image else avec image)
 
-    if (!req.file) {
+    if (profile !== null && !req.file) {
       User.update({ ...req.body, id: req.params.id }, { where: { id: req.params.id } })
       .then(() => res.status(200).json({
         message: "profil utilisateur modifié"
@@ -91,9 +90,9 @@ exports.modifyProfile = async (req, res) => {
       .catch((err) => res.status(400).json({
         error: "mauvaise requête: " + err
       }))
-    } else {
+    } else if (profile !== null) {
 
-      // Modificationdu profil utilisateur avec une image - efface l'image précédente si celle-ci n'est pas celle par défaut
+      // Modification du profil utilisateur avec une image - efface l'image précédente si celle-ci n'est pas celle par défaut
 
       const filename = profile.img_profile.split("/images/profiles/")[1];
       fs.unlink(`images/profiles/${filename}`, () => {
@@ -112,7 +111,6 @@ exports.modifyProfile = async (req, res) => {
         .then(() => res.status(200).json({ message: "profil utilisateur modifié" }))
         .catch((error) => res.status(400).json({ error }));
     
-
     }
 
   });

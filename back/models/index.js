@@ -34,4 +34,27 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+
+db.User = require('./User')(sequelize, Sequelize);
+db.Post = require('./post')(sequelize, Sequelize);
+db.Comment = require('./comment')(sequelize, Sequelize);
+
+
+db.User.hasMany(db.Post, {
+    onDelete: 'CASCADE',
+});
+db.Post.belongsTo(db.User);
+
+
+db.User.hasMany(db.Comment, {
+    onDelete: 'CASCADE',
+});
+db.Comment.belongsTo(db.User);
+
+
+db.Post.hasMany(db.Comment, {
+    onDelete: 'CASCADE',
+});
+db.Comment.belongsTo(db.Post);
+
 module.exports = db;

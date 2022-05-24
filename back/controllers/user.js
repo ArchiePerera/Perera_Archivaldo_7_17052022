@@ -11,7 +11,18 @@ exports.signup = (req, res, next) => {
   const avatarDefault =
     `${req.protocol}://${req.get("host")}/images/profiles/default/user.png`;
 
-    //Création du hash pour masquer le mot de passe en BDD
+    // Création du hash pour masquer le mot de passe après vérification des champs
+    
+    if (
+      typeof req.body.email !== 'string'
+      || typeof req.body.firstName !== 'string'
+      || typeof req.body.lastName !== 'string'
+      || typeof req.body.password !== 'string'
+      || typeof req.body.bio !== 'string'
+      || typeof req.body.img_profile !== 'string'
+    ) {
+     res.status(400).json({ message: 'Veuillez remplir les champs convenablement' });
+    }
 
   bcrypt
     .hash(req.body.password, 10)
