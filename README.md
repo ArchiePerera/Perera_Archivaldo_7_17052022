@@ -4,15 +4,9 @@
 
 Pour cela, référez-vous à la [documentation officielle](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/) et suivez les instruction en fonction de votre OS.
 
-## Gestion des bases de données MySQL
-
-### Via le terminal
-
 Lancez le terminal et accédez à MySQL
 
-```
-mysql -u root -p
-```
+## Gestion des bases de données MySQL
 
 ### Via un éditeur SGBD
 
@@ -25,12 +19,33 @@ Clonez le repo sur votre machine
 Créer un fichier <code>.env</code> à la racine du dossier 'back' et renseignez les champs suivant :
 
 ```
+# Définition des variables pour la BDD
+
 PORT=3000
 DBPORT=3001
-DB_USERNAME=root
+DB_USERNAME=votreidentifiantMySQL
 DB_PASSWORD=VotreMotDePasseMySQL
 DB_DATABASE=groupomania
 DB_HOST=127.0.0.1
+
+# Définition des ports serveurs & BDD
+
+PORT=3000
+DBPORT=3001
+
+# Définition des clefs secrètes pour les tokens et sessions
+
+TOKEN=SECRET_RANDOM_TOKEN
+
+SESSION_SECRET=SECRET_RANDOM_SESSION
+
+# Définition du compte administrateur
+
+LASTNAME=admin
+FIRSTNAME=admin
+MAIL=administrator@groupomania.com
+PASSWORD=Administrator1!
+ISENABLE=1
 ```
 
 Dans le dossier 'back', ouvrez le terminal et lancer l'installation des dépendances
@@ -44,7 +59,6 @@ Créez la base de données groupomania dans le terminal
 ```
 npx sequelize-cli db:create
 ```
-
 
 Ceci, fait, il vous suffit de lancer le script pour démarrer le serveur
 

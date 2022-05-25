@@ -17,7 +17,7 @@ exports.allProfiles = (req, res) => {
     })
     .catch((err) => {
       res.status(400).json({
-        error: "mauvaise requête :" + err
+        error: "Mauvaise requête :" + err
       });
     });
 };
@@ -48,7 +48,7 @@ exports.oneProfile = (req, res) => {
     })
     .catch((err) => {
       res.status(400).json({
-        error: "mauvaise requête :" + err
+        error: "Mauvaise requête :" + err
       });
     });
 };
@@ -82,10 +82,10 @@ exports.modifyProfile = (req, res) => {
     if (!req.file) {
       User.update({ ...req.body, id: req.params.id }, { where: { id: req.params.id } })
       .then(() => res.status(200).json({
-        message: "profil utilisateur modifié"
+        message: "Profil utilisateur modifié"
       }))
       .catch((err) => res.status(400).json({
-        error: "mauvaise requête: " + err
+        error: "Mauvaise requête: " + err
       }))
     } else {
 
@@ -93,7 +93,7 @@ exports.modifyProfile = (req, res) => {
 
       const filename = profile.img_profile.split("/images/profiles/")[1];
       fs.unlink(`images/profiles/${filename}`, () => {
-        console.log("image supprimée");
+        console.log("Image supprimée");
       });
 
       const profileObject = {
@@ -105,7 +105,7 @@ exports.modifyProfile = (req, res) => {
         
         { ...profileObject, id: req.params.id }, { where: { id: req.params.id }}
       )
-        .then(() => res.status(200).json({ message: "profil utilisateur modifié" }))
+        .then(() => res.status(200).json({ message: "Profil utilisateur modifié" }))
         .catch((error) => res.status(400).json({ error }));
     
     }
@@ -151,7 +151,7 @@ exports.deleteProfile = (req, res) => {
         })
         .catch((err) => {
           res.status(400).json({
-            error: "mauvaise requête :" + err
+            error: "Mauvaise requête :" + err
           });
         });
     });

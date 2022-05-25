@@ -41,7 +41,7 @@ const sessionConfig = {
     name: 'take a cookie',
     secret: process.env.SESSION_SECRET,
     cookie: {
-        maxAge: 1000 * 60 * 60,
+        maxAge: 1000 * 60 * 60 * 24,
         secure: false, // Mettre sur 'true' en production: https access only
         httpOnly: true, // Pas d'injection JS
     },
@@ -80,11 +80,11 @@ app.use("/images/feeds", express.static(path.join(__dirname, "feeds")));
 
 // Mise à disposition des fichiers routes
 
+const { Server } = require('http');
 const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
-const { Server } = require('http');
 
 // Routes 
 
