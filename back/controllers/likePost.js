@@ -5,8 +5,11 @@ const { User } = require('../models/index.js');
 exports.likePost = (req, res) => {
     try {
         console.log(req.body);
-        let { like, userId, postId } = req.body;
-        Like.create({like, postId, userId})
+        Like.create({
+            like: req.body.like, 
+            PostId: req.body.PostId, 
+            UserId: req.body.UserId
+        })
             .then(newLike => {
                 console.log("nouveau like créé");
                 res.status(201).json(newLike);
