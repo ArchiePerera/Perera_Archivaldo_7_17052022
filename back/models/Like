@@ -1,16 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
-    const Comment = sequelize.define('comment', {
+    const Like = sequelize.define('Like', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             allowNull: false,
         },
-        content: {
-            type: DataTypes.TEXT,
+        like: {
+            type: DataTypes.BOOLEAN,
             allowNull: false,
         },
     });
 
-    return Comment;
+    return Like;
 };

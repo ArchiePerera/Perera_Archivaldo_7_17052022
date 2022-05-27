@@ -1,31 +1,40 @@
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
+const fs = require("fs");
+const path = require("path");
+const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.js')[env];
+const env = process.env.NODE_ENV || "development";
+const config = require(__dirname + "/../config/config.js")[env];
 const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  );
 }
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+fs.readdirSync(__dirname)
+  .filter((file) => {
+    return (
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+    );
   })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+  .forEach((file) => {
+    const model = require(path.join(__dirname, file))(
+      sequelize,
+      Sequelize.DataTypes
+    );
     db[model.name] = model;
   });
 
-Object.keys(db).forEach(modelName => {
+Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
@@ -34,27 +43,31 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-
-db.User = require('./User')(sequelize, Sequelize);
-db.Post = require('./Post')(sequelize, Sequelize);
-db.Comment = require('./Comment')(sequelize, Sequelize);
-
+db.User = require("./User")(sequelize, Sequelize);
+db.Post = require("./Post")(sequelize, Sequelize);
+db.Like = require("./Like")(sequelize, Sequelize);
 
 db.User.hasMany(db.Post, {
-    onDelete: 'CASCADE',
+  onDelete: "CASCADE",
 });
 db.Post.belongsTo(db.User);
 
 
-db.User.hasMany(db.Comment, {
-    onDelete: 'CASCADE',
-});
-db.Comment.belongsTo(db.User);
+db.Post.hasMany(db.Like, {
+  onDelete: 'cascade',
+  foreignKey: { name: 'PostId', allowNull: false },
+  hooks: true });
 
-
-db.Post.hasMany(db.Comment, {
-    onDelete: 'CASCADE',
+db.Like.belongsTo(db.User, {
+  onDelete: "CASCADE",
+  foreignKey: { name: "UserId", allowNull: false },
+  hooks: true,
 });
-db.Comment.belongsTo(db.Post);
+
+db.Like.belongsTo(db.Post, {
+  onDelete: "CASCADE",
+  foreignKey: { name: "PostId", allowNull: false },
+  hooks: true,
+});
 
 module.exports = db;

@@ -84,13 +84,13 @@ const { Server } = require('http');
 const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const postRoutes = require('./routes/postRoutes');
-const commentRoutes = require('./routes/commentRoutes');
+const likeRoutes = require('./routes/likePostRoutes');
 
 // Routes 
 
 app.use('/api/auth', userRoutes);
 app.use('/api', profileRoutes);
 app.use('/api', postRoutes);
-app.use('/api', commentRoutes);
+app.use('/api', likeRoutes);
 
 module.exports = app;

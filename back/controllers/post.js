@@ -56,14 +56,12 @@ exports.modifyPost = (req, res) => {
       id: req.params.id,
     },
   }).then((post) => {
+    console.log(post);
     if (post === null) {
       return res.status(401).json({
         error: "Post non trouvé",
       });
     }
-
-    console.log(post.UserId)
-    console.log(req.auth.userId)
 
     // Comparaison de l'userId pour que seul le propriétaire du post puisse modifier
 
@@ -95,24 +93,38 @@ exports.modifyPost = (req, res) => {
     } else {
       // Modification du post avec une image - efface l'image précédente si celle-ci n'est pas celle par défaut
 
-      const filename = post.file.split("/images/feeds/")[1];
-      fs.unlink(`images/feeds/${filename}`, () => {
-        console.log("Image supprimée");
-      });
+      if (post.file === null) {
+        const postObject = {
+          ...req.body,
+          file: `${req.protocol}://${req.get("host")}/images/feeds/${
+            req.file.filename
+          }`,
+        };
 
-      const postObject = {
-        ...req.body,
-        file: `${req.protocol}://${req.get("host")}/images/feeds/${
-          req.file.filename
-        }`,
-      };
+        Post.update(
+          { ...postObject, id: req.params.id },
+          { where: { id: req.params.id } }
+        )
+          .then(() => res.status(200).json({ message: "Post modifié" }))
+          .catch((error) => res.status(400).json({ error }));
+      } else if (post.file !== null) {
+        const filename = post.file.split("/images/feeds/")[1];
+        fs.unlink(`images/feeds/${filename}`, () => {
+          console.log("Image supprimée");
+        });
 
-      Post.update(
-        { ...postObject, id: req.params.id },
-        { where: { id: req.params.id } }
-      )
-        .then(() => res.status(200).json({ message: "Post modifié" }))
-        .catch((error) => res.status(400).json({ error }));
+        const postObject = {
+          ...req.body,
+          file: `${req.protocol}://${req.get("host")}/images/feeds/${req.file}`,
+        };
+
+        Post.update(
+          { ...postObject, id: req.params.id },
+          { where: { id: req.params.id } }
+        )
+          .then(() => res.status(200).json({ message: "Post modifié" }))
+          .catch((error) => res.status(400).json({ error }));
+      }
     }
   });
 };
