@@ -45,7 +45,7 @@ LASTNAME=admin
 FIRSTNAME=admin
 MAIL=administrator@groupomania.com
 PASSWORD=Administrator1!
-ISENABLE=1
+ISADMIN=1
 ```
 
 Dans le dossier 'back', ouvrez le terminal et lancer l'installation des dépendances
@@ -100,14 +100,15 @@ node server
 
 |Verb|EndPoint|req|res|Comportement|
 |:--:|:-------|:-:|:-:|:-----------|
-|POST|/api/posts/:id/like|{UserId, PostId, like(*Boolean*)}|-|Créé un like en BDD pour le post et l'user ciblés
+|POST|/api/posts/:id/like|{UserId, PostId, like(*Boolean*)}|-|Créé un like en BDD pour le post et l'user ciblés|
+|GET|/api/posts/:id/like|-|-|-|
 
 ## Sécurité
 
 |Package|Utilisation|
-|:------|:----------|
+|:------|:----------:|
 |Helmet|Configuration des headers|
-|Cors|Configuration des la politiques cors sur le même domaine|
+|Cors|Configuration des la politiques CORS sur le même domaine|
 |Bcrypt|Cryptage des mots de passe en BDD|
 |Dotenv|Gestion des données sensibles|
 |express-rate-limit|Limitations des requêtes utilisateurs sur un temps donnée|

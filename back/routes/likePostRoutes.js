@@ -6,7 +6,7 @@ const auth = require("../middlewares/auth");
 
 
 router.post('/posts/:id/like', likeCtl.likePost);
-router.get('/posts/:id/like', likeCtl.getlikePost)
+// router.get('/posts/:id/like', likeCtl.getlikePost)
 
 
 
