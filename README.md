@@ -101,3 +101,15 @@ node server
 |Verb|EndPoint|req|res|Comportement|
 |:--:|:-------|:-:|:-:|:-----------|
 |POST|/api/posts/:id/like|{ UserId, PostId, like(*Boolean*) }|-|Créé un like en BDD pour le post et l'user ciblés
+
+## Sécurité
+
+|Package|Utilisation|
+|:------|:----------|
+|Helmet|Configuration des headers|
+|Cors|Configuration des la politiques cors sur le même domaine|
+|Bcrypt|Cryptage des mots de passe en BDD|
+|Dotenv|Gestion des données sensibles|
+|express-rate-limit|Limitations des requêtes utilisateurs sur un temps donnée|
+|jsonwebtoken|Gestion de token pour la connexion des utilisateurs|
+|express-session|Gestion des cookies|
