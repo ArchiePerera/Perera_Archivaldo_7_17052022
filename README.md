@@ -79,4 +79,11 @@ node server
 
 ### PROFILE'S PATH
 
+|Verb|EndPoint|req|res|Comportement|
+|:--:|:-------|:-:|:-:|:-----------|
+|GET|/api/profiles|-|[{ firstName, lastName, email, bio, img_profile }]|Renvoie un array contenant tous les objets user en BDD|
+|GET|/api/profiles/:id|-|{ firstName, lastName, email, bio, img_profile }|Renvoie l'objet user concerné|
+|PUT|/api/profiles/:id|{ firstName, lastName, email, bio, img_profile }|{ message: "Profil utilisateur modifié" }|Modifie l'objet user concerné|
+|DELETE|/api/profiles/:id|-|{ message: "Utilisateur supprimé" }|
 
+### POST'S PATH
