@@ -66,7 +66,23 @@ Ceci, fait, il vous suffit de lancer le script pour démarrer le serveur
 node server
 ```
 
+```Port d'écoute: 3000```
+
 ## Lancement du serveur front
+
+Dans le dossier 'front', ouvrez le terminal et lancer l'installation des dépendances
+
+```
+npm install
+```
+
+Ceci, fait, il vous suffit de lancer le script pour démarrer le serveur
+
+```
+npm run dev
+```
+
+```Port d'écoute: 5000```
 
 ## Paramètres de l'API
 

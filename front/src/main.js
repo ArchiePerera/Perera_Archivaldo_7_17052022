@@ -1,9 +1,15 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/js/bootstrap.js"
+
 import { createApp } from 'vue'
+
 import App from './App.vue'
-import router from './router'
+import Signin from "./components/Signin.vue"
 
 const app = createApp(App)
-
-app.use(router)
+const routes = [
+    { path: "/", component: App },
+    { path: "/signin", component: Signin },
+]
 
 app.mount('#app')
