@@ -84,6 +84,20 @@ node server
 |GET|/api/profiles|-|[{ firstName, lastName, email, bio, img_profile }]|Renvoie un array contenant tous les objets user en BDD|
 |GET|/api/profiles/:id|-|{ firstName, lastName, email, bio, img_profile }|Renvoie l'objet user concerné|
 |PUT|/api/profiles/:id|{ firstName, lastName, email, bio, img_profile }|{ message: "Profil utilisateur modifié" }|Modifie l'objet user concerné|
-|DELETE|/api/profiles/:id|-|{ message: "Utilisateur supprimé" }|
+|DELETE|/api/profiles/:id|-|{ message: "Utilisateur supprimé" }|Supprime l'utilisateur concerné|
 
 ### POST'S PATH
+
+|Verb|EndPoint|req|res|Comportement|
+|:--:|:-------|:-:|:-:|:-----------|
+|POST|/api/posts|{ UserId, title, content, file }|{ message: "Post créé" }|Création et enregistrement d'un post (une image *file* n'est pas obligatoire)|
+|GET|/api/posts|-|[{ UserId, title, content, file }]|Renvoie un array contenant tous les objets post en BDD|
+|GET|/api/posts/:id|-|{ UserId, title, content, file }|Renvoie l'objet post concerné|
+|PUT|/api/posts/:id|{ title, content, file }|{ message: "Post modifié" }|Modifie le post concerné|
+|DELETE|/api/posts/:id|-|{ message: "Post supprimé" }|Supprime le post concerné|
+
+### POST'S LIKE PATH
+
+|Verb|EndPoint|req|res|Comportement|
+|:--:|:-------|:-:|:-:|:-----------|
+|POST|/api/posts/:id/like|{ UserId, PostId, like(*Boolean*) }|-|Créé un like en BDD pour le post et l'user ciblés
