@@ -70,4 +70,13 @@ node server
 
 ## Paramètres de l'API
 
+### USER'S PATH
+
+|Verb|EndPoint|req|res|Comportement|
+|:--:|:-------|:-:|:-:|:-----------|
+|POST|/api/auth/signup|{ firstName, lastName, email, password }|{ message: "utilisateur créé" }|Création et enregistrement d'un utilisateur
+|POST|/api/auth/login|{ email, password }|{ UserId, token }|Vérification et accés utilisateur aux autres chemins|
+
+### PROFILE'S PATH
+
 
