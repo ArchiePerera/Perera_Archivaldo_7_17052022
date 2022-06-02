@@ -38,7 +38,7 @@ html, body {
 body {
   align-items: center;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+  background-color: #ebebeb;
 }
 
 .btn-color {

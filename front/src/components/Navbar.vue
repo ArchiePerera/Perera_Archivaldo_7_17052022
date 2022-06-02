@@ -29,14 +29,16 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400&display=swap');
 
-html, body {
+.btn-color {
+    background-color: #FD2D01;
+    color: white;
+}
+
+html,
+body {
     font-family: 'Lato', Tahoma, sans-serif;
 }
 
-.btn-color {
-  background-color: #FD2D01;
-  color: white;
-}
 
 header {
     background-color: #4E5166;
